@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CitiesDistance>
+    <city id="4">
+        <name>Novosibirsk</name>
+        <latitude>74171</latitude>
+        <longitude>1547</longitude>
+    </city>
+    <distance id="3">
+        <distance>35754.01</distance>
+        <idFromCity>4</idFromCity>
+        <idToCity>2</idToCity>
+    </distance>
+    <distance id="4">
+        <distance>2175.75</distance>
+        <idFromCity>3</idFromCity>
+        <idToCity>2</idToCity>
+    </distance>
+</CitiesDistance>

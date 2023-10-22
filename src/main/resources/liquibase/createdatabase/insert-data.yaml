@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data
+      author: IgorSochnev
+      changes:
+        - tagDatabase:
+            - tag: insert_data
+        - insert:
+            tableName: city
+            columns:
+              - column:
+                  name: name
+                  value: Samara
+              - column:
+                  name: latitude
+                  value: 135
+              - column:
+                  name: longitude
+                  value: 50
+        - insert:
+            tableName: city
+            columns:
+              - column:
+                  name: name
+                  value: Moscow
+              - column:
+                  name: latitude
+                  value: 235
+              - column:
+                  name: longitude
+                  value: 537
+        - insert:
+            tableName: city
+            columns:
+              - column:
+                  name: name
+                  value: London
+              - column:
+                  name: latitude
+                  value: 1357
+              - column:
+                  name: longitude
+                  value: 3577
+
+        - insert:
+            tableName: distance
+            columns:
+              - column:
+                  name: id_from_city
+                  value: 1
+              - column:
+                  name: id_to_city
+                  value: 2
+              - column:
+                  name: distance
+                  value: 497.16
+
+      rollback:
+        - delete:
+            tableName: distance
+            where: id_from_city=1 and id_to_city=2
+        - delete:
+            tableName: city
+            where: name in ('Samara', 'Moscow', 'London')
