@@ -1,5 +1,5 @@
 databaseChangeLog:
   - include:
-      file: liquibase/createdatabase/create-tables.yaml
+      file: liquibase/createdatabase/create-table.yaml
   - include:
       file: liquibase/createdatabase/insert-data.yaml
