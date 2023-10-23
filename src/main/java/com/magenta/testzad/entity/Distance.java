@@ -21,4 +21,7 @@ public class Distance {
 
     @Column(name = "id_to_city", updatable = false, insertable = false, nullable = false)
     private int idToCity;
+
+    @Column(name = "distance")
+    private int distance;
 }
