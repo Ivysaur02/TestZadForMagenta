@@ -24,7 +24,7 @@
 - ### List of all cities in the DB. Fields:
     - ID
     - Name
-    - Calculate distance
+- ### Calculate distance
 
 #### Input:
 
@@ -34,7 +34,8 @@
 
 #### Output:
 
-- Results: all distance calculation results as requested
+Results: all distance calculation results as requested
+
 - ### Upload data to the DB. Uploads XML file with cities and distances into the application. Application parses it and stores it into the database.
 
 #### Input:
@@ -59,4 +60,5 @@
 - Lombok
 
 ## Autor
+
 Sochnev Igor

@@ -2,7 +2,7 @@ package com.magenta.testzad.service;
 
 
 import com.magenta.testzad.entity.City;
-import com.magenta.testzad.repository.CityRepository;
+import com.magenta.testzad.repository.DistanceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DistanceService {
 
-    private final CityRepository cityRepository;
+    private final CityService cityService;
 
-    public  double calculateCrowFlightDistance(City city1, City city2) {
+    private final DistanceRepository distanceRepository;
+
+    public double calculateCrowFlightDistance(City city1, City city2) {
 
 
         int R = 6371; // Radius of the earth
@@ -25,5 +27,9 @@ public class DistanceService {
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return R * c * 1000;
+    }
+
+    public int getDistanceBetweenTwoCity() {
+        return -1;
     }
 }
