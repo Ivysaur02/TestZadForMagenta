@@ -17,5 +17,8 @@ public interface DistanceRepository extends JpaRepository<Distance, Integer> {
     @Transactional
     public void addDistance(@Param("in_id_from_city") long idFromCity, @Param("in_id_to_city") long idToCity, @Param("in_distance") double distance);
 
-    Distance findByFromCityIdAndToCityId(int fromCityId, int toCityId);
+//    @Query("SELECT * FROM Distance d WHERE d.idFromCity = :fromCityId AND d.idToCity = :toCityId")
+//    Distance findByFromCityIdAndToCityId(@Param("fromCityId") int fromCityId, @Param("toCityId") int toCityId);
+
+    Distance findByidFromCityAndIdToCity(int idFromCity, int idToCity);
 }

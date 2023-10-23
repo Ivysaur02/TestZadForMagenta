@@ -45,7 +45,7 @@ public class DistanceService {
     }
 
     public Double getDistanceBetweenTwoCity(int id_city1, int id_city2) {
-        Distance distance = distanceRepository.findByFromCityIdAndToCityId(id_city1, id_city2);
+        Distance distance = distanceRepository.findByidFromCityAndIdToCity(id_city1, id_city2);
         if (distance == null) {
             log.info("No way between cities " + id_city1 + " and " + id_city2);
             return null;
