@@ -2,22 +2,21 @@ package com.magenta.testzad.dto;
 
 
 import com.magenta.testzad.entity.Distance;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "distance")
 @XmlType(propOrder = {"id", "distance", "idFromCity", "idToCity"})
+@XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DistanceDto implements Cloneable {
 
-    @XmlElement
+    @XmlAttribute
     private int id;
     @XmlElement
     private double distance;

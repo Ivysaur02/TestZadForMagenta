@@ -13,7 +13,7 @@ import lombok.*;
 public class Distance {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "id_from_city", updatable = false, insertable = false, nullable = false)

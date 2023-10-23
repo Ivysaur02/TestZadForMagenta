@@ -2,29 +2,28 @@ package com.magenta.testzad.dto;
 
 
 import com.magenta.testzad.entity.City;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "city")
 @XmlType(propOrder = {"id", "name", "latitude", "longitude"})
+@XmlAccessorType(XmlAccessType.FIELD)
 @Setter
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CityDto implements Cloneable {
 
     @XmlAttribute
     private int id;
-    @XmlAttribute
+    @XmlElement
     private String name;
-    @XmlAttribute
+    @XmlElement
     private int latitude;
 
-    @XmlAttribute
+    @XmlElement
     private int longitude;
 
     @Override

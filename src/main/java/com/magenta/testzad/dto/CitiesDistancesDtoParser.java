@@ -3,6 +3,7 @@ package com.magenta.testzad.dto;
 
 import com.magenta.testzad.entity.City;
 import com.magenta.testzad.entity.Distance;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
@@ -46,6 +49,7 @@ import java.util.stream.Collectors;
  * <pre>&lt;/CitiesDistance&gt;</pre>
  */
 
+@Getter
 @Component
 @XmlRootElement(name = "CitiesDistance")
 @Slf4j
@@ -61,14 +65,6 @@ public class CitiesDistancesDtoParser {
         distances = new ArrayList<>();
     }
 
-    public void addCities(CityDto cityDTO) {
-        cities.add(cityDTO);
-    }
-
-    public void addDistance(DistanceDto distanceDTO) {
-        distances.add(distanceDTO);
-    }
-
     @XmlElement(name = "city")
     public ArrayList<CityDto> getCities() {
         return cities;
@@ -78,6 +74,15 @@ public class CitiesDistancesDtoParser {
     public ArrayList<DistanceDto> getDistances() {
         return distances;
     }
+
+    public void addCities(CityDto cityDTO) {
+        cities.add(cityDTO);
+    }
+
+    public void addDistance(DistanceDto distanceDTO) {
+        distances.add(distanceDTO);
+    }
+
 
     public void marshal(List<CityDto> cityDTOList, List<DistanceDto> distanceDTOList, String path) {
         CitiesDistancesDtoParser citiesDistancesDTO = new CitiesDistancesDtoParser();
@@ -128,11 +133,11 @@ public class CitiesDistancesDtoParser {
     public void unmarshal(String path) {
         CitiesDistancesDtoParser citiesDistancesDTO = new CitiesDistancesDtoParser();
 
-        if (!this.distances.isEmpty()) {
-            this.distances.clear();
+        if (!distances.isEmpty()) {
+            distances.clear();
         }
-        if (!this.cities.isEmpty()) {
-            this.cities.clear();
+        if (!cities.isEmpty()) {
+            cities.clear();
         }
 
         try {
@@ -142,11 +147,11 @@ public class CitiesDistancesDtoParser {
 
             for (CityDto cityDTO : citiesDistancesDTO.getCities()) {
                 CityDto tempCityDTO = (CityDto) cityDTO.clone();
-                this.cities.add(tempCityDTO);
+                cities.add(tempCityDTO);
             }
             for (DistanceDto distanceDTO : citiesDistancesDTO.getDistances()) {
                 DistanceDto tempDistanceDTO = (DistanceDto) distanceDTO.clone();
-                this.distances.add(tempDistanceDTO);
+                distances.add(tempDistanceDTO);
             }
         } catch (JAXBException e) {
             log.warn("Error marshalling CitiesDistancesDtoParser: {}", e.getMessage(), e);
