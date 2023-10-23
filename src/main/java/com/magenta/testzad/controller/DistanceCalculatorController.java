@@ -2,15 +2,16 @@ package com.magenta.testzad.controller;
 
 
 import com.magenta.testzad.dto.CitiesDistancesDtoParser;
-import com.magenta.testzad.dto.CityDto;
 import com.magenta.testzad.dto.CityDtoRequest;
 import com.magenta.testzad.entity.City;
 import com.magenta.testzad.service.CityService;
 import com.magenta.testzad.service.DistanceService;
+import com.magenta.testzad.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,9 @@ public class DistanceCalculatorController {
     @Autowired
     private CitiesDistancesDtoParser citiesDistancesDto;
 
+    @Autowired
+    private StorageService storageService;
+
 
     @GetMapping("/allCities")
     public List<CityDtoRequest> allCities() {
@@ -39,4 +43,19 @@ public class DistanceCalculatorController {
                 .collect(Collectors.toList());
 
     }
+
+
+    @PostMapping(value = "/addCityAndDistance", consumes = "multipart/form-data")
+    public ResponseEntity<?> addCityAndDistance(@RequestParam("file") MultipartFile file) {
+        storageService.store(file, "src/main/resources/downloadfiles/");
+
+        citiesDistancesDto.unmarshal("src/main/resources/downloadfiles/" + file.getOriginalFilename());
+
+        cityService.addCities(citiesDistancesDto.cityDTOListToCityList());
+        distanceService.addDistances(citiesDistancesDto.distanceDTOListToDistanceList());
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
+

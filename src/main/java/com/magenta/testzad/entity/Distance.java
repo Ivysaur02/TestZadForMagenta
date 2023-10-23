@@ -23,5 +23,5 @@ public class Distance {
     private int idToCity;
 
     @Column(name = "distance")
-    private int distance;
+    private double distance;
 }

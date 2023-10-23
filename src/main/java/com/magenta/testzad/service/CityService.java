@@ -23,4 +23,8 @@ public class CityService {
         return cityRepository.findById(id).orElseThrow(() -> new NoSuchCityException(id));
     }
 
+    public void addCities(List<City> cityList){
+        cityRepository.saveAll(cityList);
+    }
+
 }

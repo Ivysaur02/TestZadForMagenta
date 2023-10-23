@@ -20,7 +20,7 @@ public class DistanceDto implements Cloneable {
     @XmlElement
     private int id;
     @XmlElement
-    private int distance;
+    private double distance;
     @XmlElement
     private int idFromCity;
     @XmlElement
