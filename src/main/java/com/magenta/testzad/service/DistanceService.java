@@ -5,12 +5,14 @@ import com.magenta.testzad.entity.City;
 import com.magenta.testzad.entity.Distance;
 import com.magenta.testzad.repository.DistanceRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DistanceService {
 
     private final CityService cityService;
@@ -26,9 +28,10 @@ public class DistanceService {
         }
     }
 
-    public double calculateCrowFlightDistance(City city1, City city2) {
+    public double calculateCrowFlightDistance(int id_city1, int id_city2) {
 
-
+        City city1 = cityService.getCityByID(id_city1);
+        City city2 = cityService.getCityByID(id_city2);
         int R = 6371; // Radius of the earth
 
         double latDistance = Math.toRadians(city2.getLatitude() - city1.getLatitude());
@@ -41,7 +44,12 @@ public class DistanceService {
         return R * c * 1000;
     }
 
-    public double getDistanceBetweenTwoCity() {
-        return -1;
+    public Double getDistanceBetweenTwoCity(int id_city1, int id_city2) {
+        Distance distance = distanceRepository.findByFromCityIdAndToCityId(id_city1, id_city2);
+        if (distance == null) {
+            log.info("No way between cities " + id_city1 + " and " + id_city2);
+            return null;
+        }
+        return distance.getDistance();
     }
 }
